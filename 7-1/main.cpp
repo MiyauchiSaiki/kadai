@@ -1,58 +1,59 @@
 #include "DxLib.h"
 #include<time.h>
 
-const char TITLE[] = "GC1B_19_‹{“àÊ‹P";
+const char TITLE[] = "GC1B_19_å®®å†…å½©è¼";
 
-const int WIN_WIDTH = 600; //ƒEƒBƒ“ƒhƒE‰¡•
-const int WIN_HEIGHT = 400;//ƒEƒBƒ“ƒhƒEc•
+const int WIN_WIDTH = 600; //ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦æ¨ªå¹…
+const int WIN_HEIGHT = 400;//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ç¸¦å¹…
 
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
-	ChangeWindowMode(TRUE);						//ƒEƒBƒ“ƒhƒEƒ‚[ƒh‚Éİ’è
-	//ƒEƒBƒ“ƒhƒEƒTƒCƒY‚ğè“®‚Å‚Í•ÏX‚Å‚«‚¸A‚©‚ÂƒEƒBƒ“ƒhƒEƒTƒCƒY‚É‡‚í‚¹‚ÄŠg‘å‚Å‚«‚È‚¢‚æ‚¤‚É‚·‚é
+	ChangeWindowMode(TRUE);						//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ãƒ¢ãƒ¼ãƒ‰ã«è¨­å®š
+	//ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã‚’æ‰‹å‹•ã§ã¯å¤‰æ›´ã§ããšã€ã‹ã¤ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã‚µã‚¤ã‚ºã«åˆã‚ã›ã¦æ‹¡å¤§ã§ããªã„ã‚ˆã†ã«ã™ã‚‹
 	SetWindowSizeChangeEnableFlag(FALSE, FALSE);
-	SetMainWindowText(TITLE);					// ƒ^ƒCƒgƒ‹‚ğ•ÏX
-	SetGraphMode(WIN_WIDTH, WIN_HEIGHT, 32);	//‰æ–ÊƒTƒCƒY‚ÌÅ‘åƒTƒCƒYAƒJƒ‰[ƒrƒbƒg”‚ğİ’èiƒ‚ƒjƒ^[‚Ì‰ğ‘œ“x‚É‡‚í‚¹‚éj
-	SetWindowSizeExtendRate(1.0);				//‰æ–ÊƒTƒCƒY‚ğİ’èi‰ğ‘œ“x‚Æ‚Ì”ä—¦‚Åİ’èj
-	SetBackgroundColor(0, 0, 0);		// ‰æ–Ê‚Ì”wŒiF‚ğİ’è‚·‚é
+	SetMainWindowText(TITLE);					// ã‚¿ã‚¤ãƒˆãƒ«ã‚’å¤‰æ›´
+	SetGraphMode(WIN_WIDTH, WIN_HEIGHT, 32);	//ç”»é¢ã‚µã‚¤ã‚ºã®æœ€å¤§ã‚µã‚¤ã‚ºã€ã‚«ãƒ©ãƒ¼ãƒ“ãƒƒãƒˆæ•°ã‚’è¨­å®šï¼ˆãƒ¢ãƒ‹ã‚¿ãƒ¼ã®è§£åƒåº¦ã«åˆã‚ã›ã‚‹ï¼‰
+	SetWindowSizeExtendRate(1.0);				//ç”»é¢ã‚µã‚¤ã‚ºã‚’è¨­å®šï¼ˆè§£åƒåº¦ã¨ã®æ¯”ç‡ã§è¨­å®šï¼‰
+	SetBackgroundColor(0, 0, 0);		// ç”»é¢ã®èƒŒæ™¯è‰²ã‚’è¨­å®šã™ã‚‹
 
-	//Dxƒ‰ƒCƒuƒ‰ƒŠ‚Ì‰Šú‰»
+	//Dxãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®åˆæœŸåŒ–
 	if (DxLib_Init() == -1) { return -1; }
 
-	//iƒ_ƒuƒ‹ƒoƒbƒtƒ@j•`‰ææƒOƒ‰ƒtƒBƒbƒN—Ìˆæ‚Í— –Ê‚ğw’è
+	//ï¼ˆãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡ï¼‰æç”»å…ˆã‚°ãƒ©ãƒ•ã‚£ãƒƒã‚¯é ˜åŸŸã¯è£é¢ã‚’æŒ‡å®š
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	//‰æ‘œ‚È‚Ç‚ÌƒŠƒ\[ƒXƒf[ƒ^‚Ì•Ï”éŒ¾‚Æ“Ç‚İ‚İ
+	//ç”»åƒãªã©ã®ãƒªã‚½ãƒ¼ã‚¹ãƒ‡ãƒ¼ã‚¿ã®å¤‰æ•°å®£è¨€ã¨èª­ã¿è¾¼ã¿
 
 	int Graph;
 	Graph = LoadGraph("white.png");
 
-	//ƒQ[ƒ€ƒ‹[ƒv‚Åg‚¤•Ï”‚ÌéŒ¾
-	char keys[256] = { 0 }; //ÅV‚ÌƒL[ƒ{[ƒhî•ñ—p
-	char oldkeys[256] = { 0 };//1ƒ‹[ƒviƒtƒŒ[ƒ€j‘O‚ÌƒL[ƒ{[ƒhî•ñ
+	//ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—ã§ä½¿ã†å¤‰æ•°ã®å®£è¨€
+	char keys[256] = { 0 }; //æœ€æ–°ã®ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æƒ…å ±ç”¨
+	char oldkeys[256] = { 0 };//1ãƒ«ãƒ¼ãƒ—ï¼ˆãƒ•ãƒ¬ãƒ¼ãƒ ï¼‰å‰ã®ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æƒ…å ±
 
 	int ShakeTate = 100;
 	int ShakeYoko = 100;
 	int ObjTimer = 1500;
 	int ShakeWidth = 10;
 
+	nt Test=100;//gitç·´ç¿’çµ‚ã‚ã‚Šãã†
 
 	srand(time(NULL));
 
-	// ƒQ[ƒ€ƒ‹[ƒv
+	// ã‚²ãƒ¼ãƒ ãƒ«ãƒ¼ãƒ—
 	while (1)
 	{
-		//ÅV‚ÌƒL[ƒ{[ƒhî•ñ‚¾‚Á‚½‚à‚Ì‚Í‚PƒtƒŒ[ƒ€‘O‚ÌƒL[ƒ{[ƒhî•ñ‚Æ‚µ‚Ä•Û‘¶
+		//æœ€æ–°ã®ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æƒ…å ±ã ã£ãŸã‚‚ã®ã¯ï¼‘ãƒ•ãƒ¬ãƒ¼ãƒ å‰ã®ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æƒ…å ±ã¨ã—ã¦ä¿å­˜
 
-		//ÅV‚ÌƒL[ƒ{[ƒhî•ñ‚ğæ“¾
+		//æœ€æ–°ã®ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰æƒ…å ±ã‚’å–å¾—
 		GetHitKeyStateAll(keys);
 
-		//‰æ–ÊƒNƒŠƒA
+		//ç”»é¢ã‚¯ãƒªã‚¢
 		ClearDrawScreen();
-		//---------  ‚±‚±‚©‚çƒvƒƒOƒ‰ƒ€‚ğ‹Lq  ----------//
+		//---------  ã“ã“ã‹ã‚‰ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’è¨˜è¿°  ----------//
 
-		//XVˆ—
+		//æ›´æ–°å‡¦ç†
 		if (ObjTimer > 0) {
 			ObjTimer -= 1;
 
@@ -72,27 +73,27 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 			}
 		}
 
-		//•`‰æˆ—
+		//æç”»å‡¦ç†
 
 		DrawGraph(300 + ShakeTate, 200 + ShakeYoko, Graph, TRUE);
 
 
-		//---------  ‚±‚±‚Ü‚Å‚ÉƒvƒƒOƒ‰ƒ€‚ğ‹Lq  ---------//
-		ScreenFlip();//iƒ_ƒuƒ‹ƒoƒbƒtƒ@j— –Ê
-		// 20ƒ~ƒŠ•b‘Ò‹@i‹^—60FPSj
+		//---------  ã“ã“ã¾ã§ã«ãƒ—ãƒ­ã‚°ãƒ©ãƒ ã‚’è¨˜è¿°  ---------//
+		ScreenFlip();//ï¼ˆãƒ€ãƒ–ãƒ«ãƒãƒƒãƒ•ã‚¡ï¼‰è£é¢
+		// 20ãƒŸãƒªç§’å¾…æ©Ÿï¼ˆç–‘ä¼¼60FPSï¼‰
 		WaitTimer(20);
-		// Windows ƒVƒXƒeƒ€‚©‚ç‚­‚éî•ñ‚ğˆ—‚·‚é
+		// Windows ã‚·ã‚¹ãƒ†ãƒ ã‹ã‚‰ãã‚‹æƒ…å ±ã‚’å‡¦ç†ã™ã‚‹
 		if (ProcessMessage() == -1)
 		{
 			break;
 		}
-		// ‚d‚r‚bƒL[‚ª‰Ÿ‚³‚ê‚½‚çƒ‹[ƒv‚©‚ç”²‚¯‚é
+		// ï¼¥ï¼³ï¼£ã‚­ãƒ¼ãŒæŠ¼ã•ã‚ŒãŸã‚‰ãƒ«ãƒ¼ãƒ—ã‹ã‚‰æŠœã‘ã‚‹
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
 		{
 			break;
 		}
 	}
-	//Dxƒ‰ƒCƒuƒ‰ƒŠI—¹ˆ—
+	//Dxãƒ©ã‚¤ãƒ–ãƒ©ãƒªçµ‚äº†å‡¦ç†
 	DxLib_End();
 
 	return 0;
