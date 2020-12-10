@@ -1,34 +1,34 @@
 #include "DxLib.h"
 
-const char TITLE[] = "�w�Дԍ����O�F�^�C�g��";
+const char TITLE[] = "学籍番号名前：タイトル";
 
-const int WIN_WIDTH = 1200; //�E�B���h�E����
-const int WIN_HEIGHT = 400;//�E�B���h�E�c��
+const int WIN_WIDTH = 1200; //ウィンドウ横幅
+const int WIN_HEIGHT = 400;//ウィンドウ縦幅
 
 
 int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPSTR lpCmdLine, _In_ int nCmdShow)
 {
-	ChangeWindowMode(TRUE);						//�E�B���h�E���[�h�ɐݒ�
-	//�E�B���h�E�T�C�Y���蓮�ł͕ύX�ł����A���E�B���h�E�T�C�Y�ɍ��킹�Ċg��ł��Ȃ��悤�ɂ���
+	ChangeWindowMode(TRUE);						//ウィンドウモードに設定
+	//ウィンドウサイズを手動では変更できず、かつウィンドウサイズに合わせて拡大できないようにする
 	SetWindowSizeChangeEnableFlag(FALSE, FALSE);
-	SetMainWindowText(TITLE);					// �^�C�g����ύX
-	SetGraphMode(WIN_WIDTH, WIN_HEIGHT, 32);	//��ʃT�C�Y�̍ő�T�C�Y�A�J���[�r�b�g����ݒ�i���j�^�[�̉𑜓x�ɍ��킹��j
-	SetWindowSizeExtendRate(1.0);				//��ʃT�C�Y��ݒ�i�𑜓x�Ƃ̔䗦�Őݒ�j
-	SetBackgroundColor(0x00, 0x00, 0xFF);		// ��ʂ̔w�i�F��ݒ肷��
+	SetMainWindowText(TITLE);					// タイトルを変更
+	SetGraphMode(WIN_WIDTH, WIN_HEIGHT, 32);	//画面サイズの最大サイズ、カラービット数を設定（モニターの解像度に合わせる）
+	SetWindowSizeExtendRate(1.0);				//画面サイズを設定（解像度との比率で設定）
+	SetBackgroundColor(0x00, 0x00, 0xFF);		// 画面の背景色を設定する
 
-	//Dx���C�u�����̏�����
+	//Dxライブラリの初期化
 	if (DxLib_Init() == -1) { return -1; }
 
-	//�i�_�u���o�b�t�@�j�`���O���t�B�b�N�̈�͗��ʂ��w��
+	//（ダブルバッファ）描画先グラフィック領域は裏面を指定
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	//�摜�Ȃǂ̃��\�[�X�f�[�^�̕ϐ��錾�Ɠǂݍ���
+	//画像などのリソースデータの変数宣言と読み込み
 
 
 
-	//�Q�[�����[�v�Ŏg���ϐ��̐錾
-	char keys[256] = { 0 }; //�ŐV�̃L�[�{�[�h���p
-	char oldkeys[256] = { 0 };//1���[�v�i�t���[���j�O�̃L�[�{�[�h���
+	//ゲームループで使う変数の宣言
+	char keys[256] = { 0 }; //最新のキーボード情報用
+	char oldkeys[256] = { 0 };//1ループ（フレーム）前のキーボード情報
 
 	int MouseX, MouseY;
 	double EasingX1[] = { 100.0 };
@@ -37,19 +37,19 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 	double Vel2[] = { 1.0 };
 	int num = 0;
 
-	// �Q�[�����[�v
+	// ゲームループ
 	while (1)
 	{
-		//�ŐV�̃L�[�{�[�h��񂾂������̂͂P�t���[���O�̃L�[�{�[�h���Ƃ��ĕۑ�
+		//最新のキーボード情報だったものは１フレーム前のキーボード情報として保存
 
-		//�ŐV�̃L�[�{�[�h�����擾
+		//最新のキーボード情報を取得
 		GetHitKeyStateAll(keys);
 
-		//��ʃN���A
+		//画面クリア
 		ClearDrawScreen();
-		//---------  ��������v���O�������L�q  ----------//
+		//---------  ここからプログラムを記述  ----------//
 
-		//�X�V����
+		//更新処理
 
 
 		if (keys[KEY_INPUT_SPACE] == 1) {
@@ -58,7 +58,8 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 
 		num += 1;
 
-
+　　　　　　　　　printf("ローカルうんたら");
+		
 		SetDrawBlendMode(DX_BLENDMODE_ADD, 170);
 
 		DrawBox(100, 100, 116, 116, GetColor(255, 0, 0), TRUE);
@@ -96,27 +97,27 @@ int WINAPI WinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _
 		}
 
 
-		//�`�揈��
+		//描画処理
 
 
 
 
-		//---------  �����܂łɃv���O�������L�q  ---------//
-		ScreenFlip();//�i�_�u���o�b�t�@�j����
-		// 20�~���b�ҋ@�i�^��60FPS�j
+		//---------  ここまでにプログラムを記述  ---------//
+		ScreenFlip();//（ダブルバッファ）裏面
+		// 20ミリ秒待機（疑似60FPS）
 		WaitTimer(20);
-		// Windows �V�X�e�����炭�������������
+		// Windows システムからくる情報を処理する
 		if (ProcessMessage() == -1)
 		{
 			break;
 		}
-		// �d�r�b�L�[�������ꂽ�烋�[�v���甲����
+		// ＥＳＣキーが押されたらループから抜ける
 		if (CheckHitKey(KEY_INPUT_ESCAPE) == 1)
 		{
 			break;
 		}
 	}
-	//Dx���C�u�����I������
+	//Dxライブラリ終了処理
 	DxLib_End();
 
 	return 0;
